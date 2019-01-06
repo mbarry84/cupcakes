@@ -3,7 +3,6 @@
 	 * Created by PhpStorm.
 	 * User: matthewbarry
 	 * Date: 6Jan//19
-	 * Time: 10:51
 	 */
 	?>
 
@@ -42,33 +41,17 @@
 
 		<legend>Cupcake Flavors</legend>
 
-		<label>
-			<input type="checkbox" value="grasshopper" name="cupcake[]">&nbsp;The Grasshopper
-		</label><br>
+		<?php
+			//define list of potential certs
+            $flavors = array("grasshopper"=>"The Grasshopper", "maple"=>"Whiskey Maple Bacon",
+	                            "carrot"=>"Carrot Walnut", "caramel"=>"Salted Caramel Cupcake",
+	                            "velvet"=>"Red Velvet", "lemon"=>"Lemon Drop", "tiramisu"=>"Tiramisu");
 
-		<label>
-			<input type="checkbox" value="maple" name="cupcake[]">&nbsp;Whiskey Maple Bacon
-		</label><br>
-
-		<label>
-			<input type="checkbox" value="carrot" name="cupcake[]">&nbsp;Carrot Walnut
-		</label><br>
-
-		<label>
-			<input type="checkbox" value="caramel" name="cupcake[]">&nbsp;Salted Caramel Cupcake
-		</label><br>
-
-		<label>
-			<input type="checkbox" value="velvet" name="cupcake[]">&nbsp;Red Velvet
-		</label><br>
-
-		<label>
-			<input type="checkbox" value="lemon" name="cupcake[]">&nbsp;Lemon Drop
-		</label><br>
-
-		<label>
-			<input type="checkbox" value="tiramisu" name="cupcake[]">&nbsp;Tiramisu
-		</label><br>
+            foreach($flavors as $item => $item_value)
+            {
+	            echo "<label><input type='checkbox' value=".$item."name='cupcake[]git'> $item_value </label><br>";
+            }
+		?>
 
 	</fieldset>
 
