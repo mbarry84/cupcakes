@@ -52,7 +52,6 @@
         //Make sure the cupcake flavor has been chosen
 		if (isset($_POST['cupcake']))
         {
-	        print_r($_POST['cupcake']);
 	        $cupcakeFlavor = $_POST['cupcake'];
 
 	        //check to make sure cupcake flavor is a valid flavor
@@ -76,8 +75,23 @@
         //Display name and flavors if form filled out
 		if ($isValid)
         {
-	        echo "<p>Name: $fname $lname</p>";
-	        echo "<p>Flavors: $flavorString</p>";
+            //total for number of items ordered $3.50 per cupcake
+            $total = 3.5*(count($cupcakeFlavor));
+
+            //ensure there are 2 decimal places
+	        $total = number_format($total, 2);
+
+	        echo "<p>Thank you, $fname, for your order!</p>";
+	        echo "<p>Order Summary: ";
+
+                //display the flavors ordered
+                foreach ($cupcakeFlavor as $values)
+                {
+                    echo "<li>$values</li>";
+                }
+	        echo " </p>";//end order summary
+
+	        echo "<p>Order Total: $$total</p>";
 	        exit;
         }
 	}
