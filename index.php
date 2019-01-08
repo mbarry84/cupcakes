@@ -3,6 +3,8 @@
 	 * Created by PhpStorm.
 	 * User: matthewbarry
 	 * Date: 6Jan//19
+     *
+     * http://mbarry.greenriverdev.com/328/cupcakes/index.php
 	 */
 
 	//Turn on error reporting
@@ -34,7 +36,7 @@
 			$isValid = false;
 		}
 		else
-			{
+        {
 			$fname = $_POST['fname'];
 		}
 
