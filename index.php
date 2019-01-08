@@ -17,11 +17,16 @@
 	$lname = "";
 	$cupcakeFlavor = "";
 
-	print_r($_POST);
+	//flavors to pick from
+	$flavors = array("grasshopper"=>"The Grasshopper", "maple"=>"Whiskey Maple Bacon",
+		"carrot"=>"Carrot Walnut", "caramel"=>"Salted Caramel Cupcake",
+		"velvet"=>"Red Velvet", "lemon"=>"Lemon Drop", "tiramisu"=>"Tiramisu");
+
+
 	//If form is submitted, process the data
 	if (!empty($_POST))
 	{
-		//Make sure that first and last name are not blank.
+		//Make sure that first name is not blank.
 		$isValid = true;
 		if (empty($_POST['fname']))
 		{
@@ -33,6 +38,7 @@
 			$fname = $_POST['fname'];
 		}
 
+		//Make sure that last name is not blank.
 		if (empty($_POST['lname']))
 		{
 			echo "<p>Please provide a last name</p>";
@@ -43,20 +49,37 @@
 			$lname = $_POST['lname'];
 		}
 
+        //Make sure the cupcake flavor has been chosen
+		if (isset($_POST['cupcake']))
+        {
+	        print_r($_POST['cupcake']);
+	        $cupcakeFlavor = $_POST['cupcake'];
 
+	        //check to make sure cupcake flavor is a valid flavor
+	        foreach($cupcakeFlavor as $key => $value)
+	        {
+	            if (!array_key_exists($value, $flavors))
+                {
+	                echo "<p>Please select a flavor of Cupcake</p>";
+	                $isValid = false;
+                }
+	        }
 
-		if(!empty($_POST['cupcake']))
-		{
-			$cupcakeFlavor = $_POST['cupcake'];
-			$flavorString = implode(", ", $cupcakeFlavor);
-			echo "<p>$flavorString</p>";
+	        $flavorString = implode(", ", $cupcakeFlavor);
+        }
+        else
+        {
+	        echo "<p>Please select a flavor of Cupcake</p>";
+	        $isValid = false;
+        }
 
-		}
-		else
-		{
-			echo "<p>Please select a flavor of Cupcake</p>";
-			$isValid = false;
-		}
+        //Display name and flavors if form filled out
+		if ($isValid)
+        {
+	        echo "<p>Name: $fname $lname</p>";
+	        echo "<p>Flavors: $flavorString</p>";
+	        exit;
+        }
 	}
 
 
@@ -74,7 +97,7 @@
 	Welcome to your Cupcake order page
 </h1>
 
-<form method="POST" action="index.php">
+<form method="POST" action="">
 
 	<!--Name-->
 	<fieldset>
@@ -97,15 +120,14 @@
 
 		<legend>Cupcake Flavors</legend>
 
-		<?php
-			//define list of potential certs
-            $flavors = array("grasshopper"=>"The Grasshopper", "maple"=>"Whiskey Maple Bacon",
-	                            "carrot"=>"Carrot Walnut", "caramel"=>"Salted Caramel Cupcake",
-	                            "velvet"=>"Red Velvet", "lemon"=>"Lemon Drop", "tiramisu"=>"Tiramisu");
 
+		<?php
+
+
+            //Display flavors on the form
             foreach($flavors as $item => $item_value)
             {
-	            echo "<label><input type='checkbox' value=".$item."name='cupcake[]'> $item_value </label><br>";
+	            echo "<label><input type='checkbox' value=".$item." name='cupcake[]'>$item_value </label><br>";
             }
 		?>
 
